@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}This is the Delete Blog Page{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+<h1>Delete Blog Post</h1>
+<br><br>
+<h3>Delete: {{ post.title }}</h3>
+<br>
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        <strong>Are you sure!</strong>
+        <br><br>
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
+{% else %}
+<h1>You are not authorized to view this page.</h1>
+{% endif %}
+{% endif %}
+{% endblock content %}

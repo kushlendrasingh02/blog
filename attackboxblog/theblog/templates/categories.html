@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ cats }}{% endblock title %}
+{% block content %}
+<h1>{{ cats }}</h1>
+<ul>
+    {% for post in category_posts %}
+    <li>
+        <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> - <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a> - {{ post.author }} - {{
+        post.created_date }} <small>{% if user.is_authenticated %}<a href="{% url 'update_post' post.pk %}">(Edit)</a>
+            <a href="{% url 'delete_post' post.pk %}">(Delete)</a>{% endif %}</small>
+        <br>
+        {{ post.body|truncatewords:15|safe }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
